@@ -1,28 +1,32 @@
-o=1000;
-v1=100;
+o=1000;                                      %multiplico por 1000 para convertir a Ohmios
+v1=100;                             
 r1=5*o;
 r4=150*o;
 r3=200*o;
 
 
-for i1= -0.001:0.0001:0.001
-    i4=(-v1+r1*i1)/-r4;
+for i1= -0.001:0.0001:0.001                %el ciclo comienza en -0.001 con intervalos de 0.0001 hasta 0.001
+    i4=(-v1+r1*i1)/-r4;                    %despejo i4 de la ecuacion -v1++r1i1+r4i4=0 para hallar sus valores 
 end
+q=-v1+r1*i1+r4*i4                          %verifico que se satisfaga la ecuacion con los valores dados de i1 e i4
 
 
 r2=100*o;
 r5=250*o;
 
-fprintf('   i3          i5           v2\n')
 
+for i2=-0.001:0.0001:0.001               %ciclo para dar valores a i2
+    i5=(-r4*i4+r2*i2)/-r5;               %despejo i5 de la ecuacion -r4i4+r2i2+r5i5=0 para hallar sus valores
+end
 
-for i3=-0.001:0.0001:0.001
-for i2=-0.001:0.0001:0.001
-    i5=(-r4*i4+r2*i2)/-r5;
+h=-r4*i4+r2*i2+r5*i5                     %verifico que los valores de i2 e i5 me satisfagan la ecuacion 
 
-v2=r5*i5-r3*i3;
-if v2>0
+fprintf('   i3          i5           v2\n')       %para imprimir valores o argumentos 
+
+for i3=-0.001:0.0001:0.001  
+
+v2=r5*i5-r3*i3;                          %despejo v2 de la ecuacion -r5i5+r3i3+v2=0 
+if v2>0                                  %condiciono para mostrar solo los valores positivos de v2
 disp([i3  i5  v2])    
 end
 end 
-end
